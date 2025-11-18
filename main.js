@@ -1,0 +1,1 @@
+console.log('Header/Footer animation loaded');

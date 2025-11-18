@@ -1,0 +1,1 @@
+document.getElementById('projects').innerHTML = '<p>Project 1</p>';
