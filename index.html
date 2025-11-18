@@ -1,1 +1,90 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Home</title><link rel='stylesheet' href='css/style.css'></head><body><h1>Welcome</h1><script src='js/main.js'></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jyothsna Ratnakaram | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+margin: 0;
+font-family: 'Poppins', sans-serif;
+background: #0f0f0f;
+color: white;
+overflow-x: hidden;
+}
+header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 60px;
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 10;
+background: rgba(0, 0, 0, 0.4);
+backdrop-filter: blur(8px);
+}
+header h1 { font-size: 26px; font-weight: 700; }
+nav a {
+margin-left: 25px;
+text-decoration: none;
+color: #dcdcdc;
+font-weight: 400;
+transition: .3s;
+}
+nav a:hover { color: #ffffff; }
+
+
+.hero {
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+text-align: center;
+padding: 100px 20px 20px;
+background: linear-gradient(135deg, #141414, #1e1e1e);
+}
+.hero h2 {
+font-size: 50px;
+font-weight: 700;
+animation: fadeInUp 1.3s ease;
+}
+.hero p {
+font-size: 20px;
+color: #bcbcbc;
+max-width: 650px;
+animation: fadeInUp 1.7s ease;
+}
+
+
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(40px); }
+to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+
+<header>
+<h1>Jyothsna Ratnakaram</h1>
+<nav>
+<a href="#about">About</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+
+<section class="hero">
+<h2>Hello, I'm <span style="color:#4db8ff">Jyothsna Ratnakaram</span></h2>
+<p>A Full‑Stack Developer building modern, fast and animated web experiences.</p>
+</section>
+
+
+</body>
+</html>
