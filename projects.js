@@ -1,9 +1,8 @@
 // Load and display projects from backend
 async function loadProjects() {
   try {
-    // For local testing use: http://localhost:5000/api/projects
-    // For production use your Render URL
-    const response = await fetch('http://localhost:5000/api/projects');
+    // Production backend URL
+    const response = await fetch('https://portfolio-backend-nnvb.onrender.com/api/projects');
     
     if (!response.ok) throw new Error('Failed to load projects');
     const data = await response.json();
@@ -98,8 +97,3 @@ function displayProjects(projects) {
 
 // Load projects when page loads
 document.addEventListener('DOMContentLoaded', loadProjects);
-
-// Update footer years
-document.getElementById('year') && (document.getElementById('year').innerText = new Date().getFullYear());
-document.getElementById('year2') && (document.getElementById('year2').innerText = new Date().getFullYear());
-document.getElementById('year3') && (document.getElementById('year3').innerText = new Date().getFullYear());
