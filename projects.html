@@ -1,1 +1,383 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Projects</title><link rel='stylesheet' href='css/style.css'></head><body><h1>Projects</h1><div id='projects'></div><script src='js/projects.js'></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects – Jyothsna Ratnakaram</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f6d365, #fda085, #ff6b6b, #7be495);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0%;
+      height: 2px;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .page-title {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffe259, #ffa751, #ff6b6b, #7be495);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      animation: slideIn 1s ease forwards;
+    }
+
+    .filter-section {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.6rem 1.2rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .project {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      color: #111;
+      animation: slideUp 0.8s ease forwards;
+    }
+
+    .project:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-category {
+      display: inline-block;
+      background: #4db8ff;
+      color: #fff;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+
+    .project-description {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .project-impact {
+      color: #7be495;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .tech-stack {
+      margin-bottom: 1rem;
+    }
+
+    .tech-stack-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #333;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .tech-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .tech-tag {
+      background: #e8f4ff;
+      color: #0066cc;
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .highlights {
+      margin-bottom: 1rem;
+    }
+
+    .highlights-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #333;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .highlights ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: #555;
+      font-weight: 400;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .highlights li {
+      margin-bottom: 0.3rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .project-link {
+      flex: 1;
+      padding: 0.7rem;
+      text-decoration: none;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .link-github {
+      background: #333;
+      color: #fff;
+    }
+
+    .link-github:hover {
+      background: #111;
+    }
+
+    .link-live {
+      background: #4db8ff;
+      color: #fff;
+    }
+
+    .link-live:hover {
+      background: #2d9cdb;
+    }
+
+    .no-projects {
+      text-align: center;
+      padding: 3rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.2);
+      margin-top: 3rem;
+    }
+
+    .footer p {
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-title {
+        font-size: 2rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="logo">Jyothsna Ratnakaram</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Me</a>
+      <a href="projects.html">Projects</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">My Projects</h1>
+      <p class="page-subtitle">Data Analytics | AI/ML | Web Development</p>
+    </div>
+
+    <!-- Filter Section (Optional) -->
+    <div class="filter-section">
+      <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+      <button class="filter-btn" onclick="filterProjects('Data Analytics')">Data Analytics</button>
+      <button class="filter-btn" onclick="filterProjects('AI/Computer Vision')">AI/Computer Vision</button>
+      <button class="filter-btn" onclick="filterProjects('NLP/AI')">NLP/AI</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div id="projects-grid" class="projects-grid"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; <span id="year3"></span> Jyothsna Ratnakaram. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/projects.js"></script>
+</body>
+</html>
