@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Jyothsna Ratnakaram - Data Analyst Portfolio">
     <title>Jyothsna Ratnakaram | Data Analyst</title>
+    <!-- Chart.js for interactive dashboards -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             margin: 0;
@@ -13,34 +15,36 @@
         }
 
         :root {
-            --primary-color: #9333ea;
-            --secondary-color: #c084fc;
-            --accent-color: #a78bfa;
-            --text-color: #1f2937;
-            --bg-color: #faf5ff;
-            --white: #ffffff;
-            --gray: #6b7280;
-            --light-lavender: #e9d5ff;
-            --gradient-1: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
-            --gradient-2: linear-gradient(135deg, #ddd6fe 0%, #c084fc 100%);
-            --gradient-3: linear-gradient(135deg, #e9d5ff 0%, #c084fc 100%);
+            --lavender-primary: #967bb6;
+            --lavender-secondary: #b19cd9;
+            --lavender-accent: #c8a2c8;
+            --lavender-light: #e6e6fa;
+            --black-primary: #000000;
+            --black-secondary: #0a0a0a;
+            --black-card: #1a1a1a;
+            --black-dark: #0f0f0f;
+            --text-color: #e6e6fa;
+            --gradient-1: linear-gradient(135deg, #967bb6 0%, #000000 100%);
+            --gradient-2: linear-gradient(135deg, #000000 0%, #967bb6 100%);
+            --gradient-3: linear-gradient(135deg, #b19cd9 0%, #000000 100%);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: var(--bg-color);
+            background-color: var(--black-primary);
         }
 
         nav {
-            background: var(--primary-color);
+            background: var(--black-secondary);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(150, 123, 182, 0.2);
+            border-bottom: 1px solid var(--lavender-primary);
         }
 
         nav .container {
@@ -53,9 +57,13 @@
         }
 
         nav .logo {
-            color: var(--white);
+            color: var(--lavender-light);
             font-size: 1.5rem;
             font-weight: bold;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         nav ul {
@@ -65,28 +73,30 @@
         }
 
         nav a {
-            color: var(--white);
+            color: var(--lavender-light);
             text-decoration: none;
             transition: color 0.3s;
             font-weight: 500;
         }
 
         nav a:hover {
-            color: var(--light-lavender);
+            color: var(--lavender-accent);
         }
 
         .menu-toggle {
             display: none;
             background: none;
-            border: none;
-            color: var(--white);
+            border: 1px solid var(--lavender-primary);
+            color: var(--lavender-light);
             font-size: 1.5rem;
             cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
         }
 
         .hero {
             background: var(--gradient-1);
-            color: var(--white);
+            color: var(--lavender-light);
             padding: 120px 2rem 80px;
             text-align: center;
             min-height: 100vh;
@@ -104,7 +114,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23967bb6" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
             background-size: cover;
             opacity: 0.3;
         }
@@ -118,14 +128,15 @@
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
+            color: var(--lavender-light);
         }
 
         .hero-content .typing {
             font-size: 1.8rem;
-            color: var(--light-lavender);
+            color: var(--lavender-accent);
             min-height: 50px;
             font-weight: 600;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .hero-content p {
@@ -135,6 +146,7 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            color: var(--lavender-light);
         }
 
         .hero-content .contact-info {
@@ -143,34 +155,40 @@
         }
 
         .hero-content .contact-info a {
-            color: var(--white);
+            color: var(--lavender-accent);
             text-decoration: none;
             margin: 0 1rem;
+        }
+
+        .hero-content .contact-info span {
+            color: var(--lavender-primary);
         }
 
         .btn {
             display: inline-block;
             padding: 12px 30px;
-            background: var(--accent-color);
-            color: var(--white);
+            background: var(--lavender-primary);
+            color: var(--black-primary);
             text-decoration: none;
             border-radius: 25px;
             transition: all 0.3s;
-            border: 2px solid var(--accent-color);
+            border: 2px solid var(--lavender-primary);
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(167, 139, 250, 0.4);
+            box-shadow: 0 4px 15px rgba(150, 123, 182, 0.4);
         }
 
         .btn:hover {
             background: transparent;
+            color: var(--lavender-light);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(167, 139, 250, 0.6);
+            box-shadow: 0 6px 20px rgba(150, 123, 182, 0.6);
         }
 
         section {
             padding: 80px 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            background-color: var(--black-primary);
         }
 
         h2 {
@@ -184,6 +202,332 @@
             font-weight: 700;
         }
 
+        /* Dashboard Styles */
+        .dashboard-container {
+            background: var(--black-card);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 25px rgba(150, 123, 182, 0.3);
+            border: 1px solid var(--lavender-primary);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--lavender-primary);
+        }
+
+        .dashboard-header h3 {
+            color: var(--lavender-secondary);
+            font-size: 1.5rem;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, var(--black-secondary) 0%, rgba(150, 123, 182, 0.2) 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--lavender-primary);
+            transition: transform 0.3s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--lavender-accent);
+            margin: 0.5rem 0;
+        }
+
+        .kpi-label {
+            color: var(--lavender-light);
+            font-size: 0.9rem;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            background: var(--black-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--lavender-primary);
+            height: 300px;
+        }
+
+        .chart-title {
+            color: var(--lavender-secondary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .dashboard-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .control-group label {
+            color: var(--lavender-light);
+        }
+
+        .control-group select,
+        .control-group input {
+            background: var(--black-secondary);
+            color: var(--lavender-light);
+            border: 1px solid var(--lavender-primary);
+            padding: 0.5rem;
+            border-radius: 5px;
+            min-width: 150px;
+        }
+
+        .control-btn {
+            background: var(--lavender-primary);
+            color: var(--black-primary);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .control-btn:hover {
+            background: var(--lavender-accent);
+        }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            background: var(--black-card);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 25px rgba(150, 123, 182, 0.3);
+            border: 1px solid var(--lavender-primary);
+        }
+
+        .chatbot-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--lavender-primary);
+        }
+
+        .chatbot-header h3 {
+            color: var(--lavender-secondary);
+            font-size: 1.5rem;
+        }
+
+        .chatbot-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--lavender-light);
+        }
+
+        .chatbot-description {
+            color: var(--lavender-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .chatbot-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .chat-window {
+            background: var(--black-secondary);
+            border-radius: 10px;
+            border: 1px solid var(--lavender-primary);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-message {
+            max-width: 80%;
+            padding: 0.8rem 1rem;
+            border-radius: 15px;
+            line-height: 1.4;
+        }
+
+        .bot-message {
+            background: var(--lavender-primary);
+            color: var(--black-primary);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background: var(--lavender-light);
+            color: var(--black-primary);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid var(--lavender-primary);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            background: var(--black-primary);
+            border: 1px solid var(--lavender-primary);
+            border-radius: 5px;
+            color: var(--lavender-light);
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--lavender-accent);
+        }
+
+        .send-btn {
+            background: var(--lavender-primary);
+            color: var(--black-primary);
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            background: var(--lavender-accent);
+        }
+
+        .quick-questions {
+            background: var(--black-secondary);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid var(--lavender-primary);
+        }
+
+        .quick-questions h4 {
+            color: var(--lavender-secondary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .question-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .question-btn {
+            background: linear-gradient(135deg, var(--black-primary) 0%, rgba(150, 123, 182, 0.2) 100%);
+            color: var(--lavender-light);
+            border: 1px solid var(--lavender-primary);
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .question-btn:hover {
+            background: linear-gradient(135deg, var(--lavender-primary) 0%, var(--black-secondary) 100%);
+            transform: translateX(5px);
+        }
+
+        .chatbot-features {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--black-secondary) 0%, rgba(150, 123, 182, 0.2) 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--lavender-primary);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--lavender-light);
+            font-size: 1.5rem;
+        }
+
+        .feature-card h4 {
+            color: var(--lavender-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: var(--lavender-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* About Section Styles */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -192,10 +536,11 @@
         }
 
         .about-left {
-            background: var(--white);
+            background: var(--black-card);
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(150, 123, 182, 0.3);
+            border: 1px solid var(--lavender-primary);
         }
 
         .about-image {
@@ -206,11 +551,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
+            color: var(--lavender-light);
             font-size: 4rem;
             margin-bottom: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(150, 123, 182, 0.4);
             transition: transform 0.3s;
+            font-weight: bold;
         }
 
         .about-image:hover {
@@ -218,43 +564,45 @@
         }
 
         .certification-badge {
-            background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--lavender-primary) 0%, var(--black-secondary) 100%);
+            color: var(--lavender-light);
             padding: 0.7rem 1rem;
             margin: 0.5rem 0;
             border-radius: 10px;
             font-size: 0.9rem;
             font-weight: 600;
-            box-shadow: 0 4px 10px rgba(167, 139, 250, 0.3);
+            box-shadow: 0 4px 10px rgba(150, 123, 182, 0.3);
             transition: all 0.3s;
+            border: 1px solid var(--lavender-primary);
         }
 
         .certification-badge:hover {
             transform: translateX(5px);
-            box-shadow: 0 6px 15px rgba(167, 139, 250, 0.5);
+            box-shadow: 0 6px 15px rgba(150, 123, 182, 0.5);
         }
 
         .about-text p {
             margin-bottom: 1.5rem;
             line-height: 1.8;
-            color: var(--gray);
+            color: var(--lavender-light);
         }
 
         .education-item {
-            background: var(--white);
+            background: var(--black-card);
             padding: 1.5rem;
             border-radius: 8px;
             margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(150, 123, 182, 0.2);
+            border: 1px solid rgba(150, 123, 182, 0.2);
         }
 
         .education-item h4 {
-            color: var(--primary-color);
+            color: var(--lavender-secondary);
             margin-bottom: 0.5rem;
         }
 
         .education-item p {
-            color: var(--gray);
+            color: var(--lavender-light);
             font-size: 0.95rem;
         }
 
@@ -265,25 +613,22 @@
         }
 
         .skill-category {
-            background: var(--white);
+            background: var(--black-card);
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(150, 123, 182, 0.3);
             transition: all 0.3s;
-            border: 2px solid transparent;
+            border: 1px solid transparent;
         }
 
         .skill-category:hover {
             transform: translateY(-10px);
-            border-color: var(--secondary-color);
-            box-shadow: 0 12px 30px rgba(192, 132, 252, 0.3);
+            border-color: var(--lavender-secondary);
+            box-shadow: 0 12px 30px rgba(177, 156, 217, 0.5);
         }
 
         .skill-category h3 {
-            background: var(--gradient-3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--lavender-secondary);
             margin-bottom: 1rem;
             font-size: 1.3rem;
         }
@@ -295,19 +640,19 @@
         }
 
         .skill-tag {
-            background: linear-gradient(135deg, #e9d5ff 0%, #ddd6fe 100%);
+            background: linear-gradient(135deg, var(--black-secondary) 0%, rgba(150, 123, 182, 0.2) 100%);
             padding: 0.6rem 1.2rem;
             border-radius: 20px;
             font-size: 0.85rem;
-            color: var(--text-color);
-            border: 2px solid rgba(147, 51, 234, 0.2);
+            color: var(--lavender-light);
+            border: 1px solid var(--lavender-primary);
             font-weight: 600;
             transition: all 0.3s;
         }
 
         .skill-tag:hover {
-            background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--lavender-primary) 0%, var(--black-secondary) 100%);
+            color: var(--lavender-light);
             transform: scale(1.05);
         }
 
@@ -328,20 +673,20 @@
         }
 
         .experience-item {
-            background: var(--white);
+            background: var(--black-card);
             padding: 2rem;
             border-radius: 15px;
             margin-bottom: 2rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(150, 123, 182, 0.3);
             position: relative;
             border-left: 4px solid transparent;
             transition: all 0.3s;
         }
 
         .experience-item:hover {
-            border-left-color: var(--accent-color);
+            border-left-color: var(--lavender-accent);
             transform: translateX(5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 12px 30px rgba(150, 123, 182, 0.5);
         }
 
         .experience-item::before {
@@ -351,10 +696,10 @@
             top: 2rem;
             width: 18px;
             height: 18px;
-            background: var(--accent-color);
+            background: var(--lavender-accent);
             border-radius: 50%;
-            border: 4px solid var(--white);
-            box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.3);
+            border: 4px solid var(--black-primary);
+            box-shadow: 0 0 0 4px rgba(150, 123, 182, 0.3);
         }
 
         .experience-header {
@@ -366,18 +711,18 @@
         }
 
         .experience-header h3 {
-            color: var(--primary-color);
+            color: var(--lavender-secondary);
             font-size: 1.4rem;
         }
 
         .experience-header .company {
-            color: var(--gray);
+            color: var(--lavender-light);
             font-size: 1.1rem;
             margin: 0.3rem 0;
         }
 
         .experience-header .date {
-            color: var(--accent-color);
+            color: var(--lavender-accent);
             font-weight: 600;
             font-size: 0.95rem;
         }
@@ -391,16 +736,16 @@
             padding-left: 1.5rem;
             margin-bottom: 0.8rem;
             position: relative;
-            color: var(--gray);
+            color: var(--lavender-light);
             line-height: 1.7;
         }
 
         .experience-item li::before {
-            content: '▸';
+            content: '▶';
             position: absolute;
             left: 0;
-            color: var(--secondary-color);
-            font-weight: bold;
+            color: var(--lavender-secondary);
+            font-size: 0.8rem;
         }
 
         .projects-grid {
@@ -410,29 +755,30 @@
         }
 
         .project-card {
-            background: var(--white);
+            background: var(--black-card);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(150, 123, 182, 0.3);
             transition: all 0.3s;
-            border: 2px solid transparent;
+            border: 1px solid transparent;
         }
 
         .project-card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            border-color: var(--secondary-color);
+            box-shadow: 0 15px 40px rgba(150, 123, 182, 0.5);
+            border-color: var(--lavender-secondary);
         }
 
         .project-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            background: linear-gradient(135deg, var(--lavender-secondary), var(--black-secondary));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
+            color: var(--lavender-light);
             font-size: 3.5rem;
+            font-weight: bold;
         }
 
         .project-content {
@@ -440,13 +786,13 @@
         }
 
         .project-content h3 {
-            color: var(--primary-color);
+            color: var(--lavender-secondary);
             margin-bottom: 0.8rem;
             font-size: 1.3rem;
         }
 
         .project-content p {
-            color: var(--gray);
+            color: var(--lavender-light);
             line-height: 1.7;
             margin-bottom: 1rem;
         }
@@ -459,28 +805,30 @@
         }
 
         .tech-badge {
-            background: var(--gradient-3);
+            background: var(--gradient-2);
             padding: 0.4rem 1rem;
             border-radius: 15px;
             font-size: 0.8rem;
-            color: var(--primary-color);
+            color: var(--lavender-light);
             font-weight: 600;
-            box-shadow: 0 2px 8px rgba(167, 139, 250, 0.3);
+            box-shadow: 0 2px 8px rgba(150, 123, 182, 0.3);
             transition: all 0.3s;
+            border: 1px solid var(--lavender-primary);
         }
 
         .tech-badge:hover {
             transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(167, 139, 250, 0.5);
+            box-shadow: 0 4px 12px rgba(150, 123, 182, 0.5);
         }
 
         .contact-content {
             max-width: 600px;
             margin: 0 auto;
-            background: var(--white);
+            background: var(--black-card);
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(150, 123, 182, 0.3);
+            border: 1px solid var(--lavender-primary);
         }
 
         .contact-info-section {
@@ -490,11 +838,11 @@
 
         .contact-info-section p {
             margin: 0.5rem 0;
-            color: var(--gray);
+            color: var(--lavender-light);
         }
 
         .contact-info-section a {
-            color: var(--secondary-color);
+            color: var(--lavender-secondary);
             text-decoration: none;
             font-weight: 600;
         }
@@ -507,23 +855,25 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--text-color);
+            color: var(--lavender-light);
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e5e7eb;
+            border: 1px solid var(--lavender-primary);
             border-radius: 5px;
             font-family: inherit;
             transition: border-color 0.3s;
+            background: var(--black-secondary);
+            color: var(--lavender-light);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--secondary-color);
+            border-color: var(--lavender-secondary);
         }
 
         .form-group textarea {
@@ -532,11 +882,12 @@
         }
 
         footer {
-            background: var(--gradient-1);
-            color: var(--white);
+            background: var(--black-secondary);
+            color: var(--lavender-light);
             text-align: center;
             padding: 2rem;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 -5px 20px rgba(150, 123, 182, 0.3);
+            border-top: 1px solid var(--lavender-primary);
         }
 
         .social-links {
@@ -547,18 +898,22 @@
         }
 
         .social-links a {
-            color: var(--white);
+            color: var(--lavender-light);
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s;
         }
 
         .social-links a:hover {
-            color: var(--light-lavender);
+            color: var(--lavender-accent);
         }
 
         @media (max-width: 968px) {
             .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .chatbot-content {
                 grid-template-columns: 1fr;
             }
         }
@@ -571,8 +926,9 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: var(--primary-color);
+                background: var(--black-card);
                 padding: 1rem 0;
+                border-top: 1px solid var(--lavender-primary);
             }
 
             nav ul.active {
@@ -602,6 +958,18 @@
             .experience-timeline {
                 padding-left: 1.5rem;
             }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-controls {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -609,13 +977,15 @@
     <nav>
         <div class="container">
             <div class="logo">JR</div>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <button class="menu-toggle" onclick="toggleMenu()">≡</button>
             <ul id="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#dashboards">Dashboards</a></li>
+                <li><a href="#chatbot">Chatbot</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -642,7 +1012,7 @@
         <div class="about-content">
             <div class="about-left">
                 <div class="about-image">JR</div>
-                <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Certifications</h3>
+                <h3 style="margin-bottom: 1rem; color: var(--lavender-secondary);">Certifications</h3>
                 <div class="certification-badge">AWS Cloud Practitioner</div>
                 <div class="certification-badge">AWS Data Engineer</div>
                 <div class="certification-badge">CompTIA Security+</div>
@@ -654,16 +1024,16 @@
                     <p>I specialize in transforming complex datasets into clear, actionable insights that drive business strategy. My experience spans across healthcare, logistics, marketing analytics, and business intelligence, where I've consistently delivered value through data-driven decision making.</p>
                 </div>
                 
-                <h3 style="margin: 2rem 0 1rem; color: var(--primary-color);">Education</h3>
+                <h3 style="margin: 2rem 0 1rem; color: var(--lavender-secondary);">Education</h3>
                 <div class="education-item">
                     <h4>Master of Science in Computer Science</h4>
                     <p>New Jersey Institute of Technology, Newark, NJ</p>
-                    <p style="color: var(--accent-color); font-weight: 600;">Jan 2023 - May 2025</p>
+                    <p style="color: var(--lavender-accent); font-weight: 600;">Jan 2023 - May 2025</p>
                 </div>
                 <div class="education-item">
                     <h4>B.Tech in Computer Science & Engineering</h4>
                     <p>B.V Raju Institute of Technology, Hyderabad, India</p>
-                    <p style="color: var(--accent-color); font-weight: 600;">Jan 2019 - Dec 2023</p>
+                    <p style="color: var(--lavender-accent); font-weight: 600;">Jan 2019 - Dec 2023</p>
                 </div>
             </div>
         </div>
@@ -801,7 +1171,7 @@
         <h2>Featured Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <div class="project-image"></div>
+                <div class="project-image">LA</div>
                 <div class="project-content">
                     <h3>Logistics Analytics Dashboard</h3>
                     <p>Comprehensive Power BI dashboard tracking delivery performance, route optimization, and operational KPIs. Reduced reporting time by 40% and improved delivery efficiency through data-driven insights.</p>
@@ -815,7 +1185,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-image"></div>
+                <div class="project-image">HA</div>
                 <div class="project-content">
                     <h3>Healthcare Analytics Dashboard</h3>
                     <p>Interactive dashboard analyzing patient data, treatment outcomes, and resource utilization. Enabled healthcare providers to make data-driven decisions for improved patient care and operational efficiency.</p>
@@ -829,7 +1199,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-image"></div>
+                <div class="project-image">MA</div>
                 <div class="project-content">
                     <h3>Marketing & Ad Analytics Dashboard</h3>
                     <p>Real-time marketing performance dashboard tracking campaign ROI, customer engagement, and conversion rates. Improved marketing efficiency by 12% through A/B testing and trend analysis.</p>
@@ -843,7 +1213,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-image"></div>
+                <div class="project-image">SC</div>
                 <div class="project-content">
                     <h3>Student Information Chatbot</h3>
                     <p>Developed an interactive Q&A chatbot for Student Information System using Python and NLP libraries. Structured student query data and designed menu-driven interface with SQLite/Firebase backend.</p>
@@ -857,7 +1227,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-image"></div>
+                <div class="project-image">TC</div>
                 <div class="project-content">
                     <h3>Smart Traffic Control using AI</h3>
                     <p>AI-driven system optimizing traffic light control by analyzing real-time traffic data and predicting congestion patterns. Applied data preprocessing, feature extraction, and developed visualization dashboards.</p>
@@ -871,7 +1241,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-image"></div>
+                <div class="project-image">SP</div>
                 <div class="project-content">
                     <h3>Safe Passwords Application</h3>
                     <p>Mobile application for secure password storage using SHA-based encryption. Structured and managed sensitive credential data with SQLite, implementing SHA-256/SHA-512 encryption standards.</p>
@@ -881,6 +1251,317 @@
                         <span class="tech-badge">Encryption</span>
                         <span class="tech-badge">Security</span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboards">
+        <h2>Interactive Analytics Dashboards</h2>
+        
+        <!-- Logistics Analytics Dashboard -->
+        <div class="dashboard-container" id="logistics-dashboard">
+            <div class="dashboard-header">
+                <h3> Logistics Analytics Dashboard</h3>
+                <div class="dashboard-controls">
+                    <div class="control-group">
+                        <label for="logistics-time">Time Period:</label>
+                        <select id="logistics-time" onchange="updateLogisticsDashboard()">
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly" selected>Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="logistics-region">Region:</label>
+                        <select id="logistics-region" onchange="updateLogisticsDashboard()">
+                            <option value="all">All Regions</option>
+                            <option value="north">North</option>
+                            <option value="south">South</option>
+                            <option value="east">East</option>
+                            <option value="west">West</option>
+                        </select>
+                    </div>
+                    <button class="control-btn" onclick="resetLogisticsFilters()">Reset Filters</button>
+                </div>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">On-Time Delivery Rate</div>
+                    <div class="kpi-value" id="delivery-rate">94.2%</div>
+                    <div class="kpi-trend">↑ 2.1%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Avg Delivery Time</div>
+                    <div class="kpi-value" id="delivery-time">2.4h</div>
+                    <div class="kpi-trend">↓ 0.3h</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Route Efficiency</div>
+                    <div class="kpi-value" id="route-efficiency">87.5%</div>
+                    <div class="kpi-trend">↑ 3.2%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Fuel Cost Saving</div>
+                    <div class="kpi-value" id="fuel-saving">$12.4K</div>
+                    <div class="kpi-trend">↑ $2.1K</div>
+                </div>
+            </div>
+            
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Delivery Performance Trend</div>
+                    <canvas id="logisticsChart1"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Route Optimization Analysis</div>
+                    <canvas id="logisticsChart2"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Delivery Time Distribution</div>
+                    <canvas id="logisticsChart3"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Regional Performance</div>
+                    <canvas id="logisticsChart4"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Healthcare Analytics Dashboard -->
+        <div class="dashboard-container" id="healthcare-dashboard">
+            <div class="dashboard-header">
+                <h3> Healthcare Analytics Dashboard</h3>
+                <div class="dashboard-controls">
+                    <div class="control-group">
+                        <label for="healthcare-department">Department:</label>
+                        <select id="healthcare-department" onchange="updateHealthcareDashboard()">
+                            <option value="all">All Departments</option>
+                            <option value="emergency">Emergency</option>
+                            <option value="surgery">Surgery</option>
+                            <option value="cardiology">Cardiology</option>
+                            <option value="oncology">Oncology</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="healthcare-metric">Primary Metric:</label>
+                        <select id="healthcare-metric" onchange="updateHealthcareDashboard()">
+                            <option value="patients">Patient Metrics</option>
+                            <option value="treatment">Treatment Outcomes</option>
+                            <option value="resource">Resource Utilization</option>
+                        </select>
+                    </div>
+                    <button class="control-btn" onclick="resetHealthcareFilters()">Reset Filters</button>
+                </div>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Patient Satisfaction</div>
+                    <div class="kpi-value" id="patient-satisfaction">92.4%</div>
+                    <div class="kpi-trend">↑ 4.2%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Avg Treatment Time</div>
+                    <div class="kpi-value" id="treatment-time">3.2h</div>
+                    <div class="kpi-trend">↓ 0.8h</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Readmission Rate</div>
+                    <div class="kpi-value" id="readmission-rate">8.7%</div>
+                    <div class="kpi-trend">↓ 1.3%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Resource Utilization</div>
+                    <div class="kpi-value" id="resource-util">84.2%</div>
+                    <div class="kpi-trend">↑ 5.6%</div>
+                </div>
+            </div>
+            
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Patient Admissions Trend</div>
+                    <canvas id="healthcareChart1"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Treatment Outcomes</div>
+                    <canvas id="healthcareChart2"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Resource Allocation</div>
+                    <canvas id="healthcareChart3"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Department Performance</div>
+                    <canvas id="healthcareChart4"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marketing Analytics Dashboard -->
+        <div class="dashboard-container" id="marketing-dashboard">
+            <div class="dashboard-header">
+                <h3> Marketing & Ad Analytics Dashboard</h3>
+                <div class="dashboard-controls">
+                    <div class="control-group">
+                        <label for="marketing-campaign">Campaign:</label>
+                        <select id="marketing-campaign" onchange="updateMarketingDashboard()">
+                            <option value="all">All Campaigns</option>
+                            <option value="q1">Q1 Campaign</option>
+                            <option value="q2">Q2 Campaign</option>
+                            <option value="summer">Summer Sale</option>
+                            <option value="holiday">Holiday Special</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="marketing-channel">Channel:</label>
+                        <select id="marketing-channel" onchange="updateMarketingDashboard()">
+                            <option value="all">All Channels</option>
+                            <option value="social">Social Media</option>
+                            <option value="email">Email</option>
+                            <option value="search">Search Ads</option>
+                            <option value="display">Display Ads</option>
+                        </select>
+                    </div>
+                    <button class="control-btn" onclick="resetMarketingFilters()">Reset Filters</button>
+                </div>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">ROI</div>
+                    <div class="kpi-value" id="roi-value">42.8%</div>
+                    <div class="kpi-trend">↑ 8.4%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Conversion Rate</div>
+                    <div class="kpi-value" id="conversion-value">3.8%</div>
+                    <div class="kpi-trend">↑ 0.9%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Customer Acquisition</div>
+                    <div class="kpi-value" id="acquisition-cost">$24.50</div>
+                    <div class="kpi-trend">↓ $3.20</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Engagement Rate</div>
+                    <div class="kpi-value" id="engagement-rate">18.2%</div>
+                    <div class="kpi-trend">↑ 2.7%</div>
+                </div>
+            </div>
+            
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Campaign Performance</div>
+                    <canvas id="marketingChart1"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Channel Effectiveness</div>
+                    <canvas id="marketingChart2"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Customer Journey</div>
+                    <canvas id="marketingChart3"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">ROI by Campaign</div>
+                    <canvas id="marketingChart4"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="chatbot">
+        <h2>Interactive Student Information Chatbot</h2>
+        
+        <div class="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-icon">.</div>
+                <h3>Student Information Assistant</h3>
+            </div>
+            
+            <p class="chatbot-description">
+                This AI-powered chatbot helps students get instant answers about courses, schedules, grades, 
+                campus resources, and more. Built with Python, NLP, and SQLite database integration.
+            </p>
+            
+            <div class="chatbot-content">
+                <div class="chat-window">
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Messages will appear here -->
+                        <div class="chat-message bot-message">
+                            Hello! I'm your Student Information Assistant. How can I help you today?
+                        </div>
+                        <div class="chat-message bot-message">
+                            You can ask me about:
+                            <br>• Course schedules and availability
+                            <br>• Grade information and GPA calculation
+                            <br>• Campus resources and facilities
+                            <br>• Registration deadlines and procedures
+                            <br>• Academic calendar events
+                            <br>• Faculty contact information
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" class="chat-input" id="chatInput" 
+                               placeholder="Type your question here..." 
+                               onkeypress="handleChatInputKeypress(event)">
+                        <button class="send-btn" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+                
+                <div class="quick-questions">
+                    <h4>Quick Questions</h4>
+                    <div class="question-buttons">
+                        <button class="question-btn" onclick="askQuestion('What courses are available for Computer Science majors?')">
+                            Available CS courses?
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('When is the registration deadline for Fall 2024?')">
+                            Registration deadline?
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('How do I check my grades?')">
+                            Check my grades
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('What is the GPA calculation formula?')">
+                            GPA calculation
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('Where is the library located?')">
+                            Library location
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('How do I contact my advisor?')">
+                            Contact advisor
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('What are the tuition fees for international students?')">
+                            Tuition fees
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('Is there parking available on campus?')">
+                            Campus parking
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-features">
+                <div class="feature-card">
+                    <div class="feature-icon">.</div>
+                    <h4>Course Information</h4>
+                    <p>Get details about courses, prerequisites, schedules, and instructor information</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">.</div>
+                    <h4>Grade Tracking</h4>
+                    <p>Check grades, calculate GPA, and monitor academic progress in real-time</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">.</div>
+                    <h4>Schedule Management</h4>
+                    <p>View class schedules, exam dates, and academic calendar events</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">.</div>
+                    <h4>Campus Resources</h4>
+                    <p>Find information about libraries, labs, dining halls, and student services</p>
                 </div>
             </div>
         </div>
@@ -913,7 +1594,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 Jyothsna Ratnakaram. All rights reserved.</p>
+        <p>&copy; 2025 Jyothsna Ratnakaram. All rights reserved.</p>
         <div class="social-links">
             <a href="https://github.com/yourusername" target="_blank">GitHub</a>
             <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
@@ -924,6 +1605,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     
     <script>
+        // Initialize Typed.js
         const typed = new Typed('#typed-text', {
             strings: [
                 'Data Analyst', 
@@ -939,6 +1621,7 @@
             loop: true
         });
 
+        // Navigation functions
         function toggleMenu() {
             const menu = document.getElementById('nav-menu');
             menu.classList.toggle('active');
@@ -964,6 +1647,7 @@
             e.target.reset();
         }
 
+        // Scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -984,6 +1668,735 @@
             section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(section);
         });
+
+        // Dashboard Data and Functions
+        const lavenderColor = '#967bb6';
+        const lavenderLight = '#b19cd9';
+        const lavenderAccent = '#c8a2c8';
+
+        // Logistics Dashboard
+        let logisticsCharts = [];
+
+        function initLogisticsDashboard() {
+            // Chart 1: Delivery Performance Trend
+            const ctx1 = document.getElementById('logisticsChart1').getContext('2d');
+            const chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'On-Time Deliveries',
+                        data: [92, 94, 93, 95, 96, 94, 95],
+                        borderColor: lavenderColor,
+                        backgroundColor: 'rgba(150, 123, 182, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Target',
+                        data: [95, 95, 95, 95, 95, 95, 95],
+                        borderColor: '#4CAF50',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        fill: false
+                    }]
+                },
+                options: getChartOptions('Delivery Performance (%)')
+            });
+
+            // Chart 2: Route Optimization Analysis
+            const ctx2 = document.getElementById('logisticsChart2').getContext('2d');
+            const chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Route A', 'Route B', 'Route C', 'Route D', 'Route E'],
+                    datasets: [{
+                        label: 'Optimization Score',
+                        data: [85, 92, 78, 95, 88],
+                        backgroundColor: [
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderColor
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 1
+                    }]
+                },
+                options: getChartOptions('Optimization Score (%)')
+            });
+
+            // Chart 3: Delivery Time Distribution
+            const ctx3 = document.getElementById('logisticsChart3').getContext('2d');
+            const chart3 = new Chart(ctx3, {
+                type: 'doughnut',
+                data: {
+                    labels: ['<2h', '2-4h', '4-6h', '>6h'],
+                    datasets: [{
+                        data: [45, 35, 15, 5],
+                        backgroundColor: [
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderAccent,
+                            '#8a7bb8'
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 4: Regional Performance
+            const ctx4 = document.getElementById('logisticsChart4').getContext('2d');
+            const chart4 = new Chart(ctx4, {
+                type: 'radar',
+                data: {
+                    labels: ['On-Time', 'Cost', 'Efficiency', 'Safety', 'Customer Sat'],
+                    datasets: [{
+                        label: 'North Region',
+                        data: [92, 88, 85, 95, 90],
+                        backgroundColor: 'rgba(150, 123, 182, 0.2)',
+                        borderColor: lavenderColor,
+                        borderWidth: 2
+                    }, {
+                        label: 'South Region',
+                        data: [88, 92, 90, 88, 85],
+                        backgroundColor: 'rgba(177, 156, 217, 0.2)',
+                        borderColor: lavenderLight,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: '#333'
+                            },
+                            grid: {
+                                color: '#333'
+                            },
+                            pointLabels: {
+                                color: '#e6e6fa'
+                            },
+                            ticks: {
+                                color: '#e6e6fa',
+                                backdropColor: '#000'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            logisticsCharts = [chart1, chart2, chart3, chart4];
+        }
+
+        function updateLogisticsDashboard() {
+            const timePeriod = document.getElementById('logistics-time').value;
+            const region = document.getElementById('logistics-region').value;
+            
+            // Update KPIs based on filters
+            const kpis = {
+                'weekly': { rate: '94.2%', time: '2.4h', efficiency: '87.5%', saving: '$12.4K' },
+                'monthly': { rate: '93.8%', time: '2.5h', efficiency: '85.2%', saving: '$48.2K' },
+                'quarterly': { rate: '92.1%', time: '2.7h', efficiency: '83.4%', saving: '$142.7K' }
+            };
+            
+            const selectedKPI = kpis[timePeriod] || kpis.monthly;
+            
+            document.getElementById('delivery-rate').textContent = selectedKPI.rate;
+            document.getElementById('delivery-time').textContent = selectedKPI.time;
+            document.getElementById('route-efficiency').textContent = selectedKPI.efficiency;
+            document.getElementById('fuel-saving').textContent = selectedKPI.saving;
+            
+            // Update charts with new data based on filters
+            // In a real application, you would fetch new data here
+            console.log(`Updating logistics dashboard with ${timePeriod} period and ${region} region`);
+        }
+
+        function resetLogisticsFilters() {
+            document.getElementById('logistics-time').value = 'monthly';
+            document.getElementById('logistics-region').value = 'all';
+            updateLogisticsDashboard();
+        }
+
+        // Healthcare Dashboard
+        let healthcareCharts = [];
+
+        function initHealthcareDashboard() {
+            // Chart 1: Patient Admissions Trend
+            const ctx1 = document.getElementById('healthcareChart1').getContext('2d');
+            const chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Emergency',
+                        data: [120, 135, 142, 130, 145, 155],
+                        borderColor: lavenderColor,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }, {
+                        label: 'Surgery',
+                        data: [85, 92, 88, 95, 102, 98],
+                        borderColor: lavenderLight,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }, {
+                        label: 'Cardiology',
+                        data: [65, 72, 68, 75, 82, 78],
+                        borderColor: lavenderAccent,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: getChartOptions('Number of Patients')
+            });
+
+            // Chart 2: Treatment Outcomes
+            const ctx2 = document.getElementById('healthcareChart2').getContext('2d');
+            const chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Excellent', 'Good', 'Fair', 'Poor'],
+                    datasets: [{
+                        label: 'Treatment Outcomes',
+                        data: [45, 35, 15, 5],
+                        backgroundColor: [
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderAccent,
+                            '#8a7bb8'
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 1
+                    }]
+                },
+                options: getChartOptions('Percentage (%)')
+            });
+
+            // Chart 3: Resource Allocation
+            const ctx3 = document.getElementById('healthcareChart3').getContext('2d');
+            const chart3 = new Chart(ctx3, {
+                type: 'pie',
+                data: {
+                    labels: ['Doctors', 'Nurses', 'Equipment', 'Medication', 'Facilities'],
+                    datasets: [{
+                        data: [35, 25, 20, 15, 5],
+                        backgroundColor: [
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderAccent,
+                            '#8a7bb8',
+                            '#a890d0'
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 4: Department Performance
+            const ctx4 = document.getElementById('healthcareChart4').getContext('2d');
+            const chart4 = new Chart(ctx4, {
+                type: 'polarArea',
+                data: {
+                    labels: ['Emergency', 'Surgery', 'Cardiology', 'Oncology', 'Pediatrics'],
+                    datasets: [{
+                        data: [85, 92, 88, 95, 82],
+                        backgroundColor: [
+                            'rgba(150, 123, 182, 0.7)',
+                            'rgba(177, 156, 217, 0.7)',
+                            'rgba(200, 162, 200, 0.7)',
+                            'rgba(136, 123, 184, 0.7)',
+                            'rgba(168, 144, 208, 0.7)'
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            grid: {
+                                color: '#333'
+                            },
+                            ticks: {
+                                color: '#e6e6fa',
+                                backdropColor: '#000'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            healthcareCharts = [chart1, chart2, chart3, chart4];
+        }
+
+        function updateHealthcareDashboard() {
+            const department = document.getElementById('healthcare-department').value;
+            const metric = document.getElementById('healthcare-metric').value;
+            
+            // Update KPIs based on filters
+            const kpis = {
+                'all': { satisfaction: '92.4%', time: '3.2h', readmission: '8.7%', resource: '84.2%' },
+                'emergency': { satisfaction: '94.2%', time: '1.8h', readmission: '6.5%', resource: '92.1%' },
+                'surgery': { satisfaction: '91.8%', time: '4.5h', readmission: '9.2%', resource: '78.4%' }
+            };
+            
+            const selectedKPI = kpis[department] || kpis.all;
+            
+            document.getElementById('patient-satisfaction').textContent = selectedKPI.satisfaction;
+            document.getElementById('treatment-time').textContent = selectedKPI.time;
+            document.getElementById('readmission-rate').textContent = selectedKPI.readmission;
+            document.getElementById('resource-util').textContent = selectedKPI.resource;
+            
+            console.log(`Updating healthcare dashboard for ${department} department with ${metric} metrics`);
+        }
+
+        function resetHealthcareFilters() {
+            document.getElementById('healthcare-department').value = 'all';
+            document.getElementById('healthcare-metric').value = 'patients';
+            updateHealthcareDashboard();
+        }
+
+        // Marketing Dashboard
+        let marketingCharts = [];
+
+        function initMarketingDashboard() {
+            // Chart 1: Campaign Performance
+            const ctx1 = document.getElementById('marketingChart1').getContext('2d');
+            const chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                    datasets: [{
+                        label: 'ROI',
+                        data: [35, 38, 42, 45, 43, 48],
+                        borderColor: lavenderColor,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Conversion Rate',
+                        data: [2.8, 3.1, 3.5, 3.8, 3.6, 4.0],
+                        borderColor: lavenderLight,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: '#333'
+                            },
+                            ticks: {
+                                color: '#e6e6fa'
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'ROI (%)',
+                                color: lavenderColor
+                            },
+                            grid: {
+                                color: '#333'
+                            },
+                            ticks: {
+                                color: '#e6e6fa'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Conversion Rate (%)',
+                                color: lavenderLight
+                            },
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                            ticks: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Channel Effectiveness
+            const ctx2 = document.getElementById('marketingChart2').getContext('2d');
+            const chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Social', 'Email', 'Search', 'Display', 'Affiliate'],
+                    datasets: [{
+                        label: 'Effectiveness Score',
+                        data: [85, 72, 95, 68, 78],
+                        backgroundColor: [
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderColor
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 1
+                    }]
+                },
+                options: getChartOptions('Effectiveness Score')
+            });
+
+            // Chart 3: Customer Journey
+            const ctx3 = document.getElementById('marketingChart3').getContext('2d');
+            const chart3 = new Chart(ctx3, {
+                type: 'line',
+                data: {
+                    labels: ['Awareness', 'Consideration', 'Conversion', 'Retention', 'Advocacy'],
+                    datasets: [{
+                        label: 'Customer Journey',
+                        data: [10000, 4500, 1200, 850, 420],
+                        borderColor: lavenderColor,
+                        backgroundColor: 'rgba(150, 123, 182, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: getChartOptions('Number of Customers')
+            });
+
+            // Chart 4: ROI by Campaign
+            const ctx4 = document.getElementById('marketingChart4').getContext('2d');
+            const chart4 = new Chart(ctx4, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Campaign ROI',
+                        data: [
+                            {x: 5000, y: 35},
+                            {x: 8000, y: 42},
+                            {x: 3000, y: 28},
+                            {x: 12000, y: 48},
+                            {x: 6000, y: 38},
+                            {x: 10000, y: 45}
+                        ],
+                        backgroundColor: lavenderColor,
+                        borderColor: '#000',
+                        borderWidth: 1,
+                        pointRadius: 8
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Ad Spend ($)',
+                                color: '#e6e6fa'
+                            },
+                            grid: {
+                                color: '#333'
+                            },
+                            ticks: {
+                                color: '#e6e6fa'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'ROI (%)',
+                                color: '#e6e6fa'
+                            },
+                            grid: {
+                                color: '#333'
+                            },
+                            ticks: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            marketingCharts = [chart1, chart2, chart3, chart4];
+        }
+
+        function updateMarketingDashboard() {
+            const campaign = document.getElementById('marketing-campaign').value;
+            const channel = document.getElementById('marketing-channel').value;
+            
+            // Update KPIs based on filters
+            const kpis = {
+                'all': { roi: '42.8%', conversion: '3.8%', acquisition: '$24.50', engagement: '18.2%' },
+                'q1': { roi: '38.5%', conversion: '3.2%', acquisition: '$28.40', engagement: '15.8%' },
+                'q2': { roi: '45.2%', conversion: '4.1%', acquisition: '$21.80', engagement: '19.5%' }
+            };
+            
+            const selectedKPI = kpis[campaign] || kpis.all;
+            
+            document.getElementById('roi-value').textContent = selectedKPI.roi;
+            document.getElementById('conversion-value').textContent = selectedKPI.conversion;
+            document.getElementById('acquisition-cost').textContent = selectedKPI.acquisition;
+            document.getElementById('engagement-rate').textContent = selectedKPI.engagement;
+            
+            console.log(`Updating marketing dashboard for ${campaign} campaign on ${channel} channel`);
+        }
+
+        function resetMarketingFilters() {
+            document.getElementById('marketing-campaign').value = 'all';
+            document.getElementById('marketing-channel').value = 'all';
+            updateMarketingDashboard();
+        }
+
+        // Helper function for chart options
+        function getChartOptions(yAxisLabel) {
+            return {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#e6e6fa'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: '#333'
+                        },
+                        ticks: {
+                            color: '#e6e6fa'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#333'
+                        },
+                        ticks: {
+                            color: '#e6e6fa'
+                        },
+                        title: {
+                            display: true,
+                            text: yAxisLabel,
+                            color: '#e6e6fa'
+                        }
+                    }
+                }
+            };
+        }
+
+        // Chatbot Functions
+        const chatbotResponses = {
+            // Course Information
+            'course': {
+                pattern: /course|class|schedule|subject|curriculum|major/gi,
+                responses: [
+                    "The Computer Science department offers courses in Data Structures, Algorithms, Database Systems, Machine Learning, and Web Development.",
+                    "For Spring 2024, CS courses include CS501 (Advanced Algorithms), CS502 (Database Management), and CS503 (Machine Learning Fundamentals).",
+                    "Course schedules are available on the student portal. Most CS courses are offered on Mondays and Wednesdays from 10 AM to 12 PM."
+                ]
+            },
+            'registration': {
+                pattern: /register|registration|deadline|enroll|add drop/gi,
+                responses: [
+                    "The registration deadline for Fall 2024 is August 15, 2024. Late registration with a fee is available until August 30.",
+                    "You can register for courses through the student portal under 'Course Registration' section.",
+                    "Add/drop period is during the first two weeks of each semester. No penalty during this period."
+                ]
+            },
+            'grade': {
+                pattern: /grade|gpa|score|mark|result|transcript/gi,
+                responses: [
+                    "Grades are typically posted within 72 hours after final exams. You can check them on the student portal.",
+                    "GPA is calculated on a 4.0 scale: A=4.0, B=3.0, C=2.0, D=1.0, F=0.0.",
+                    "To calculate your GPA, multiply each course grade points by credit hours, sum them, then divide by total credit hours."
+                ]
+            },
+            'advisor': {
+                pattern: /advisor|counselor|faculty|professor|contact/gi,
+                responses: [
+                    "Your academic advisor is Dr. Sarah Johnson. Her office is in the Computer Science building, room 302.",
+                    "You can schedule appointments with your advisor through the student portal or email at sjohnson@university.edu.",
+                    "Faculty office hours are posted on department websites and outside faculty offices."
+                ]
+            },
+            'library': {
+                pattern: /library|book|resource|study|lab/gi,
+                responses: [
+                    "The main library is open Monday-Friday 8 AM-10 PM, Saturday 9 AM-8 PM, and Sunday 10 AM-6 PM.",
+                    "The computer science lab in building A has 24/7 access for CS students with valid ID.",
+                    "You can access online journals and databases through the library website using your student credentials."
+                ]
+            },
+            'fee': {
+                pattern: /fee|tuition|payment|cost|financial/gi,
+                responses: [
+                    "Tuition for undergraduate students is $15,000 per semester for full-time enrollment.",
+                    "International students have an additional fee of $2,000 per semester for visa processing and services.",
+                    "Payment deadlines are typically two weeks before each semester begins. Installment plans are available."
+                ]
+            },
+            'parking': {
+                pattern: /parking|transport|commute|campus/gi,
+                responses: [
+                    "Student parking permits cost $200 per semester. Parking lots are located near each academic building.",
+                    "The campus shuttle runs every 15 minutes from 7 AM to 11 PM between major campus locations.",
+                    "Bicycle racks are available near all buildings. Bike registration is free at campus security."
+                ]
+            },
+            'default': {
+                pattern: /.*/,
+                responses: [
+                    "I'm not sure I understand. Could you rephrase your question?",
+                    "That's an interesting question! Could you provide more details?",
+                    "I'm still learning about that topic. Try asking about courses, grades, or campus resources.",
+                    "For specific inquiries, please contact the relevant department directly."
+                ]
+            }
+        };
+
+        function getBotResponse(userMessage) {
+            userMessage = userMessage.toLowerCase();
+            
+            // Check for matches in each response category
+            for (const category in chatbotResponses) {
+                if (category !== 'default') {
+                    if (chatbotResponses[category].pattern.test(userMessage)) {
+                        const responses = chatbotResponses[category].responses;
+                        return responses[Math.floor(Math.random() * responses.length)];
+                    }
+                }
+            }
+            
+            // Return default response if no match found
+            const defaultResponses = chatbotResponses.default.responses;
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+
+        function addMessage(message, isUser = false) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                // Add user message
+                addMessage(message, true);
+                input.value = '';
+                
+                // Simulate typing delay
+                setTimeout(() => {
+                    // Get bot response
+                    const response = getBotResponse(message);
+                    addMessage(response, false);
+                }, 1000);
+            }
+        }
+
+        function askQuestion(question) {
+            const input = document.getElementById('chatInput');
+            input.value = question;
+            sendMessage();
+        }
+
+        function handleChatInputKeypress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Initialize all dashboards and chatbot when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initLogisticsDashboard();
+            initHealthcareDashboard();
+            initMarketingDashboard();
+            
+            // Initialize with default values
+            updateLogisticsDashboard();
+            updateHealthcareDashboard();
+            updateMarketingDashboard();
+            
+            // Add welcome message to chatbot
+            setTimeout(() => {
+                addMessage("Welcome to the Student Information System! I'm here to help you with academic queries.", false);
+            }, 500);
+        });
     </script>
 </body>
 </html>
+
+
